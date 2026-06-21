@@ -24,6 +24,16 @@ def disk():
 @app.get('/system')
 def system():
     return {
-        'platform': psutil.SYSTEM, 
+        'platform': psutil.SYSTEM,
         'boot_time': psutil.boot_time()
+    }
+
+@app.get('/network')
+def network():
+    net = psutil.net_io_counters()
+    return {
+        'bytes_sent': net.bytes_sent,
+        'bytes_recv': net.bytes_recv,
+        'packets_sent': net.packets_sent,
+        'packets_recv': net.packets_recv
     }
